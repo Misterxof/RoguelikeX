@@ -5,25 +5,33 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Components
-    Rigidbody2D rigidbody;
+    Rigidbody2D _rigidbody;
+    [SerializeField] FixedJoystick _joystick;
 
     // Player
-    float walkSpeed = 2f;
-    float speedLimiter = 0.7f;
+    public ObjectType type = ObjectType.Player;
+    public float healthPoints = 100f;
+    public float walkSpeed = 2f;
+    public float speedLimiter = 0.7f;
     float inputHorizontal;
     float inputVertitcal;
 
     // Start is called before the first frame update 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
-        inputVertitcal = Input.GetAxisRaw("Vertical");
+        inputHorizontal = _joystick.Horizontal;
+        inputVertitcal = _joystick.Vertical;
+
+        if (healthPoints <= 0)
+        {
+            Debug.Log("DEAD");
+        }
     }
 
     private void FixedUpdate()
@@ -37,10 +45,15 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log(inputHorizontal);
 
-            rigidbody.velocity = new Vector2(inputHorizontal * walkSpeed, inputVertitcal * walkSpeed);
+            _rigidbody.velocity = new Vector2(inputHorizontal * walkSpeed, inputVertitcal * walkSpeed);
         } else
         {
-            rigidbody.velocity = Vector2.zero;
+            _rigidbody.velocity = Vector2.zero;
         }
+    }
+
+    public void OnHealthDamage(float damage)
+    {
+        healthPoints -= damage;
     }
 }

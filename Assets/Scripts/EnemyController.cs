@@ -9,9 +9,12 @@ public class EnemyController : MonoBehaviour
     GameObject player;
     Rigidbody2D playerRigidBody;
 
-    // Player
-    float walkSpeed = 2f;
-    float speedLimiter = 0.7f;
+    // Enemy
+    public ObjectType type = ObjectType.Enemy;
+    public float healthPoints = 100f;
+    public float damage = 10f;
+    public float walkSpeed = 2f;
+    public float speedLimiter = 0.7f;
     float inputHorizontal;
     float inputVertitcal;
 
@@ -66,5 +69,11 @@ public class EnemyController : MonoBehaviour
         {
             rigidbody.velocity = Vector2.zero;
         }
+    }
+
+    public void OnCollisionWithPlayer(Collider2D collision, GameObject impacter)
+    {
+        impacter.GetComponent<PlayerController>().OnHealthDamage(10);
+        Debug.Log("Health " + impacter.GetComponent<PlayerController>().healthPoints);
     }
 }
