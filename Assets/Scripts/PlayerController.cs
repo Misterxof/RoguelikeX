@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] FixedJoystick _joystick;
     private HealthBar healthBar;
     private ExperienceBar experienceBar;
+    
+    // Callbacks
+    private GameCallbacks gameCallbacks;
 
     // Player
     public ObjectType type = ObjectType.Player;
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
         if (healthPoints <= 0)
         {
             Debug.Log("DEAD");
+            gameCallbacks.OnGameOver();
         }
     }
 
@@ -67,5 +71,10 @@ public class PlayerController : MonoBehaviour
     {
         experiencePoints += experience;
         experienceBar.OnExperienceChange(experiencePoints);
+    }
+
+    public void setGameCallbacks(GameCallbacks gameCallbacks)
+    {
+        this.gameCallbacks = gameCallbacks;
     }
 }
