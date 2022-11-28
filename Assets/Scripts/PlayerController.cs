@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
         if (healthPoints <= 0)
         {
-            Debug.Log("DEAD");
+            //Debug.Log("DEAD");
             gameCallbacks.OnGameOver();
         }
     }
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
                 inputHorizontal *= speedLimiter;
                 inputVertitcal *= speedLimiter;
             }
-            Debug.Log(inputHorizontal);
 
             _rigidbody.velocity = new Vector2(inputHorizontal * walkSpeed, inputVertitcal * walkSpeed);
         } else

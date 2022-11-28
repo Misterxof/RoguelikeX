@@ -71,9 +71,29 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void OnHealthDamage(float damage)
+    {
+        healthPoints -= damage;
+        Debug.Log("Hitted " + gameObject.name + " health " + healthPoints);
+
+        if (healthPoints <= 0)
+        {
+            Debug.Log("Dead " + gameObject.name);
+            Die();
+        }
+    }
+
     public void OnCollisionWithPlayer(Collider2D collision, GameObject impacter)
     {
         impacter.GetComponent<PlayerController>().OnHealthDamage(10);
         Debug.Log("Health " + impacter.GetComponent<PlayerController>().healthPoints);
+    }
+
+    void Die()
+    {
+        // animation
+
+        // disable
+       // this.enabled = false;
     }
 }

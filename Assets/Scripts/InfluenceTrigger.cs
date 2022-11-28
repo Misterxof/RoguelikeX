@@ -7,7 +7,7 @@ public class InfluenceTrigger : MonoBehaviour
     private bool flag = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Enter " + collision.ToString());
+        //Debug.Log("Enter " + collision.ToString());
 
         //if (string.Equals(collision.tag, "Player"))
        // {
@@ -22,7 +22,7 @@ public class InfluenceTrigger : MonoBehaviour
             
             if (flag == false)
             {
-                Debug.Log("Stay 1");
+                //Debug.Log("Stay 1");
                 flag = true;
                 StartCoroutine(ExampleCoroutine(collision, collision.gameObject));
             }   else
@@ -37,7 +37,7 @@ public class InfluenceTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Exit");
+       // Debug.Log("Exit");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
