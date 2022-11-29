@@ -17,21 +17,21 @@ public class InfluenceTrigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (string.Equals(collision.tag, "Player"))
-        {
+        //Debug.Log("Stay 1");
+        //if (string.Equals(collision.tag, "Player"))
+        //{
             
-            if (flag == false)
-            {
-                //Debug.Log("Stay 1");
-                flag = true;
-                StartCoroutine(ExampleCoroutine(collision, collision.gameObject));
-            }   else
-            {
-               // Debug.Log("Stay");
-            }
-
+        //    if (flag == false)
+        //    {
+        //        //Debug.Log("Stay 1");
+        //        flag = true;
+        //        StartCoroutine(ExampleCoroutine(collision, collision.gameObject));
+        //    }   else
+        //    {
+        //       // Debug.Log("Stay");
+        //    }
         
-        }
+        //}
 
     }
 
@@ -42,9 +42,30 @@ public class InfluenceTrigger : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionEnter2D with " + collision.gameObject.name);
+        //Debug.Log("OnCollisionEnter2D with " + collision.gameObject.name);
         
        // gameObject.GetComponent<CraterCreator>().OnCollision(collision, collision.gameObject);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Collider2D collider = collision.collider;
+        //Debug.Log("OnCollisionEnter2D stay " + collision.gameObject.name);
+        if (string.Equals(collider.tag, "Player"))
+        {
+
+            if (flag == false)
+            {
+                //Debug.Log("Stay 1");
+                flag = true;
+                StartCoroutine(ExampleCoroutine(collider, collision.gameObject));
+            }
+            else
+            {
+                // Debug.Log("Stay");
+            }
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

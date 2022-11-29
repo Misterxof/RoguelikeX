@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     // Player
     public ObjectType type = ObjectType.Player;
-    public float healthPoints = 100f;
+    public float healthPoints = 10000f;
     public float experiencePoints = 0f;
     public float walkSpeed = 2f;
     public float speedLimiter = 0.7f;

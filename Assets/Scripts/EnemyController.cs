@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // Components
-    Rigidbody2D rigidbody;
+    Rigidbody2D _rigidbody;
     GameObject player;
     Rigidbody2D playerRigidBody;
 
@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
         playerRigidBody = player.GetComponent<Rigidbody2D>();
     }
@@ -29,8 +29,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float directitonX = rigidbody.position.x - playerRigidBody.position.x;
-        float directitonY = rigidbody.position.y - playerRigidBody.position.y;
+        float directitonX = _rigidbody.position.x - playerRigidBody.position.x;
+        float directitonY = _rigidbody.position.y - playerRigidBody.position.y;
 
         if (directitonX > 0 && directitonY > 0)
         {
@@ -63,11 +63,11 @@ public class EnemyController : MonoBehaviour
                 inputVertitcal *= speedLimiter;
             }
 
-            rigidbody.velocity = new Vector2(inputHorizontal * walkSpeed, inputVertitcal * walkSpeed);
+            _rigidbody.velocity = new Vector2(inputHorizontal * walkSpeed, inputVertitcal * walkSpeed);
         }
         else
         {
-            rigidbody.velocity = Vector2.zero;
+            _rigidbody.velocity = Vector2.zero;
         }
     }
 
