@@ -7,14 +7,45 @@ namespace Possibilities
 {
     public class PlayerStats : MonoBehaviour
     {
+        private float maxHealthPoints = 100f;
+        private float maxExperiencePoints = 100f;   // for new level
+
         [Header("Player Stats")]
         
-        public float PlayerHealth = 100f;
-
+        [SerializeField]
+        private float healthPoints = 100f;
         [SerializeField]
         private float m_PlayerExperience = 0;
+        [SerializeField]
+        private int m_Level = 1;
+        [SerializeField]
+        private int knowledgePoints = 1;
 
-        public float PlayerExperience
+        [Header("Attributes")]
+        public List<PlayerAttributes> Attributes = new List<PlayerAttributes>();
+
+        [Header("Skills")]
+        public List<Skills> PlayerSkills = new List<Skills>();
+
+        public float PlayerMaxHealthPoints
+        {
+            set { maxHealthPoints = value; }
+            get { return maxHealthPoints; }
+        }
+
+        public float PlayerMaxExperiencePoints
+        {
+            set { maxExperiencePoints = value; }
+            get { return maxExperiencePoints; }  
+        }
+
+        public float PlayerHealthPoints
+        {
+            get { return healthPoints; }
+            set { healthPoints = value; }
+        }
+
+        public float PlayerExperiencePoints
         {
             get { return m_PlayerExperience; }
             set {
@@ -25,8 +56,6 @@ namespace Possibilities
             }
         }
 
-        [SerializeField]
-        private int m_Level = 1;
         public int PlayerLevel
         {
             get { return m_Level; }
@@ -39,18 +68,17 @@ namespace Possibilities
                     onLevelChange();
             }
         }
-        public int PlayerKnowledgePoints = 1;
 
-        [Header("Attributes")]
-        public List<PlayerAttributes> Attributes = new List<PlayerAttributes>();
-
-        [Header("Skills")]
-        public List<Skills> PlayerSkills = new List<Skills>();
+        public int PlayerKnowledgePoints
+        {
+            get { return knowledgePoints; }
+            set { knowledgePoints = value; }
+        }
 
         // Start is called before the first frame update
         void Start()
         {
-
+            maxExperiencePoints = healthPoints;
         }
 
         // Update is called once per frame

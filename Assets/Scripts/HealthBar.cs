@@ -5,17 +5,16 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private const float MAX_HEALTH = 100f;
-
     private Image healthBar;
 
-    public HealthBar(float health)
+    public HealthBar(float health, float maxHealth)
     {
         healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Image>();
+        OnHealthtChange(health, maxHealth);
     }
 
-    public void OnHealthtChange(float health)
+    public void OnHealthtChange(float health, float maxHealth)
     {
-       healthBar.fillAmount = health / MAX_HEALTH;
+       healthBar.fillAmount = health / maxHealth;
     }
 }

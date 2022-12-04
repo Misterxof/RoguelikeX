@@ -1,3 +1,4 @@
+using Possibilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,14 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] FixedJoystick _joystick;
     private HealthBar healthBar;
     private ExperienceBar experienceBar;
-    
+    public PlayerStats PlayerStats;
+
     // Callbacks
     private GameCallbacks gameCallbacks;
 
     // Player
     public ObjectType type = ObjectType.Player;
-    public float healthPoints = 10000f;
-    public float experiencePoints = 0f;
     public float walkSpeed = 2f;
     public float speedLimiter = 0.7f;
     float inputHorizontal;
@@ -26,8 +26,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        healthBar = new HealthBar(healthPoints);
-        experienceBar = new ExperienceBar(experiencePoints);
+        PlayerStats = GetComponent<PlayerStats>();
+        healthBar = new HealthBar(PlayerStats.PlayerHealthPoints, PlayerStats.PlayerMaxHealthPoints);
+        experienceBar = new ExperienceBar(PlayerStats.PlayerExperiencePoints, PlayerStats.PlayerMaxExperiencePoints);
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
         inputHorizontal = _joystick.Horizontal;
         inputVertitcal = _joystick.Vertical;
 
-        if (healthPoints <= 0)
+        if (PlayerStats.PlayerHealthPoints <= 0)
         {
             //Debug.Log("DEAD");
             gameCallbacks.OnGameOver();
@@ -62,14 +63,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnHealthDamage(float damage)
     {
-        healthPoints -= damage;
-        healthBar.OnHealthtChange(healthPoints);
+        PlayerStats.PlayerHealthPoints -= damage;
+        healthBar.OnHealthtChange(PlayerStats.PlayerHealthPoints, PlayerStats.PlayerMaxHealthPoints);
     }
 
     public void OnExperienceChange(float experience)
     {
-        experiencePoints += experience;
-        experienceBar.OnExperienceChange(experiencePoints);
+        PlayerStats.PlayerExperiencePoints += experience;
+        experienceBar.OnExperienceChange(PlayerStats.PlayerExperiencePoints, PlayerStats.PlayerMaxExperiencePoints);
     }
 
     public void setGameCallbacks(GameCallbacks gameCallbacks)

@@ -1,3 +1,4 @@
+using Possibilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class EnemyController : MonoBehaviour
     public float damage = 10f;
     public float walkSpeed = 2f;
     public float speedLimiter = 0.7f;
+    public float enemyExp = 10f;
     float inputHorizontal;
     float inputVertitcal;
 
@@ -86,11 +88,13 @@ public class EnemyController : MonoBehaviour
     public void OnCollisionWithPlayer(Collider2D collision, GameObject impacter)
     {
         impacter.GetComponent<PlayerController>().OnHealthDamage(10);
-        Debug.Log("Health " + impacter.GetComponent<PlayerController>().healthPoints);
+        Debug.Log("Health " + impacter.GetComponent<PlayerController>().PlayerStats.PlayerHealthPoints);
     }
 
     void Die()
     {
+        player.GetComponent<PlayerController>().OnExperienceChange(enemyExp);
+        Destroy(this.gameObject);
         // animation
 
         // disable
