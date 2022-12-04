@@ -11,7 +11,12 @@ namespace Possibilities
         [SerializeField]
         private Canvas _Canvas;
         private bool showCanvas;
-        
+
+        private void Start()
+        {
+            PlayerStats = GetComponent<PlayerStats>();
+        }
+
         // Update is called once per frame
         void Update()
         {

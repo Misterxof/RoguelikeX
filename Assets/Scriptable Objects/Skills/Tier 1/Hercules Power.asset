@@ -19,5 +19,5 @@ MonoBehaviour:
   CurrentLevel: 0
   isEvolutionary: 0
   AffectetedAttributes:
-  - attributes: {fileID: 11400000, guid: dc49cb4f34ba7484b8b6832ef91ffeae, type: 2}
+  - attribute: {fileID: 11400000, guid: dc49cb4f34ba7484b8b6832ef91ffeae, type: 2}
     amount: 10
