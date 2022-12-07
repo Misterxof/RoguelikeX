@@ -67,4 +67,32 @@ public static class Utils
 
         return (x, y);
     }
+
+    public static EnemyController FindClosest(Transform playerTransform)
+    {
+        float distanceToClosestEnemy = Mathf.Infinity;
+        EnemyController closestEnemy = null;
+        EnemyController[] allEnemies = GameObject.FindObjectsOfType<EnemyController>();
+
+        foreach (EnemyController currentEnemy in allEnemies)
+        {
+            float distanceToEnemy = (currentEnemy.transform.position - playerTransform.position).sqrMagnitude;
+            if (distanceToEnemy < distanceToClosestEnemy)
+            {
+                distanceToClosestEnemy = distanceToEnemy;
+                closestEnemy = currentEnemy;
+            }
+        }
+        Debug.DrawLine(playerTransform.position, closestEnemy.transform.position, Color.red);
+        return closestEnemy;
+    }
+
+    public static Vector3 LerpByDistance(Vector3 A, Vector3 B, float x)
+    {
+        //  1) Find direction from A to B, magnitude(=length) is 1
+        //  2) Move it for x
+        //  3) Move it from A by addition A
+        Vector3 P = x * Vector3.Normalize(B - A) + A;   // Point from A in the B direction, moved from A by x
+        return P;
+    }
 }

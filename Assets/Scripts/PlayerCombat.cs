@@ -33,6 +33,11 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
+        EnemyController enemyC = Utils.FindClosest(this.transform);
+        Debug.Log("NEAREST " + Utils.FindClosest(this.transform).name);
+        Vector3 newPos = Utils.LerpByDistance(this.transform.position, enemyC.transform.position, 0.1f);
+        attackPoint.transform.position = newPos;
+        //attackPoint.transform.position = Vector3.Lerp(this.transform.position, enemyC.transform.position, 0.1f);
         animator.SetTrigger("Attack");
 
         Collider2D[] hittedEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -45,7 +50,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (attackPoint != null)
+       
+        if (attackPoint == null)
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
